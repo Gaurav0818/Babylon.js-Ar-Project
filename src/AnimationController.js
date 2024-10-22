@@ -16,6 +16,7 @@ let currentAnim = {
 };
 let animationKeyMap = {}; 
 export const SetAnimKeyMaps = () => {
+	console.log(playerAnims);
 	idleAnim = playerAnims[0];
 	walkAnim = playerAnims[3];
 	runAnim = playerAnims[4];
@@ -52,7 +53,7 @@ export const SetAnimKeyMaps = () => {
 };
 
 export const playAnimation = (anim) => {
-	if (currentAnim["animName"] != anim) {
+	if (currentAnim["animName"] != anim || currentAnim["looping"] != true) {
 		if (currentAnim["anim"]) {
 			currentAnim["anim"].stop();
 		}

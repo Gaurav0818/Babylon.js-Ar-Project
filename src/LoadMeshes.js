@@ -7,7 +7,7 @@ export let playerAnims;
 
 export const SetupEnviornment = async (scene) => {
 	console.log("Env Setup");
-	CreatPlayerContainer(scene);
+	return CreatPlayerContainer(scene);
 };
 
 export const SpawnPlayer = async (playerRoot, scene) => {
@@ -32,13 +32,13 @@ export const CreatPlayerContainer = async (scene) => {
 		"Models/Avatar.glb",
 		scene
 	);
-	const animContainer = await BABYLON.SceneLoader.ImportMeshAsync(
+	const animMesh = await BABYLON.SceneLoader.ImportMeshAsync(
 		null,
 		"Models/Avatar_RIG_V4.glb",
 		"",
 		scene
 	);
-	let animGroup = animContainer.animationGroups;
+	let animGroup = animMesh.animationGroups;
 
 	const playerRoot = playerContainer.instantiateModelsToScene((s) => s, false, {
 		doNotInstantiate: true,
@@ -54,6 +54,9 @@ export const CreatPlayerContainer = async (scene) => {
 				tempAnimHolder.push(element);
 			}
 	});
+
+	playerRoot.rootNodes[0].position.z = 5;
+	playerRoot.rootNodes[0].addRotation(0, Math.PI, 0);
 	const anims = retargetAnims(playerRoot.rootNodes[0], tempAnimHolder);
 	playerRoot.rootNodes[0].animations = anims;
 	playerAnims = playerRoot.rootNodes[0].animations;
@@ -61,9 +64,7 @@ export const CreatPlayerContainer = async (scene) => {
 
 	SetAnimKeyMaps();
 
-	const player = await SpawnPlayer(playerRoot.rootNodes[0], scene);
-
-	new InputHandler(scene, player);
+	return playerRoot;
 };
 export const retargetAnims = (player, animations) => {
 	const newAnimations = [];
