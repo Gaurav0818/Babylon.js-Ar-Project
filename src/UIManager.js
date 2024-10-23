@@ -5,7 +5,7 @@ import { engine } from "./Scene";
 let scene;
 let panel;
 
-export const initUI = (s) => 
+export const initUI = (s, xr) => 
 {
 	scene = s;
 
@@ -14,9 +14,11 @@ export const initUI = (s) =>
 	panel = new GUI.StackPanel();
 	panel.width = "300px";
 	panel.isVertical = true;
-	panel.paddingRight = "20px";
-	panel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-	panel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+	panel.paddingRight = "10px";
+	panel.paddingBottom = "50px";
+	panel.paddingLeft = "10px";
+	panel.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+	panel.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 	UI.addControl(panel);
 
 	let fps = new GUI.TextBlock("fps" + "fps");
@@ -37,6 +39,19 @@ export const initUI = (s) =>
 	addButton("Jump Animation", () => playAnimation("jumpAnim"));
 	addButton("Idle Animation", () => playAnimation("idleAnim"));
 
+
+	if (xr) {
+        xr.baseExperience.onStateChangedObservable.add((state) => {
+            if (state === BABYLON.WebXRState.IN_XR) {
+                // Adjust the UI or buttons when entering AR
+                UI.scaleTo(screen.width, screen.height);  // Rescale UI for AR mode
+            } else {
+                // Restore original UI scale when exiting AR
+                UI.scaleTo(screen.width, screen.height);  // Rescale UI back
+            }
+        });
+    }
+
 	return panel;
 };
 
@@ -48,5 +63,8 @@ const addButton = (text, onClick) =>
 	button.color = "white";
 	button.background = "green";
 	button.onPointerUpObservable.add(onClick);
+
+	button.paddingTop = "5px";
+
 	panel.addControl(button);
 };

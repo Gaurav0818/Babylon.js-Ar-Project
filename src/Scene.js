@@ -103,7 +103,7 @@ export const Scene = () =>
 
 		if (!uiPanel)
 		{
-			uiPanel = initUI(scene); // Initialize and store uiPanel if not created yet
+			uiPanel = initUI(scene, xr); // Initialize and store uiPanel if not created yet
 		} 
 		else 
 		{
