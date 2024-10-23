@@ -4,18 +4,22 @@ import { playerAnims } from "./LoadMeshes";
 let idleAnim;
 let walkAnim;
 let runAnim;
-export let jumpAnim;
+let jumpAnim;
 
 let slideAnim;
 
-let currentAnim = {
+let currentAnim = 
+{
 	animName: null,
 	anim: null,
 	looping: null,
 	blending: 0,
 };
+
 let animationKeyMap = {}; 
-export const SetAnimKeyMaps = () => {
+
+export const SetAnimKeyMaps = () => 
+{
 	console.log(playerAnims);
 	idleAnim = playerAnims[0];
 	walkAnim = playerAnims[3];
@@ -49,14 +53,17 @@ export const SetAnimKeyMaps = () => {
 			state: 0,
 		},
 	};
-
 };
 
-export const playAnimation = (anim) => {
-	if (currentAnim["animName"] != anim || currentAnim["looping"] != true) {
-		if (currentAnim["anim"]) {
+export const playAnimation = (anim) => 
+{
+	if (currentAnim["animName"] != anim || currentAnim["looping"] != true) 
+	{
+		if (currentAnim["anim"]) 
+		{
 			currentAnim["anim"].stop();
 		}
+		
 		currentAnim["animName"] = anim;
 		currentAnim["anim"] = animationKeyMap[anim]["anim"];
 		currentAnim["looping"] = animationKeyMap[anim]["looping"];

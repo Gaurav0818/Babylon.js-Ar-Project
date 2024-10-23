@@ -5,7 +5,8 @@ import { engine } from "./Scene";
 let scene;
 let panel;
 
-export const DebugUI = (s) => {
+export const initUI = (s) => 
+{
 	scene = s;
 
 	let UI = GUI.AdvancedDynamicTexture.CreateFullscreenUI();
@@ -25,7 +26,8 @@ export const DebugUI = (s) => {
 	fps.horizontalAlignment = 0;
 	fps.verticalAlignment = 0;
 	UI.addControl(fps);
-	scene.registerBeforeRender(() => {
+	scene.registerBeforeRender(() => 
+	{
 		fps.text = "fps: " + engine.getFps().toFixed();
 	});
 
@@ -36,7 +38,8 @@ export const DebugUI = (s) => {
 	addButton("Idle Animation", () => playAnimation("idleAnim"));
 };
 
-const addButton = (text, onClick) => {
+const addButton = (text, onClick) => 
+{
 	let button = GUI.Button.CreateSimpleButton(text, text);
 	button.width = "150px";
 	button.height = "40px";
