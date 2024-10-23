@@ -11,19 +11,16 @@ This project is an augmented reality (AR) application built using React and Baby
 ## Firebase Deployment
 
 This project is deployed on Firebase for easy access. You can visit the live demo by going to:
+
 https://arproject-a879b.web.app
 
 ## Installation
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/Gaurav0818/AR_test.git
-    cd AR_test
-    ```
+1. Clone the repository
 
 2. Install the dependencies:
     ```sh
-    npm install
+    npm i
     ```
 
 ## Usage
@@ -31,6 +28,10 @@ https://arproject-a879b.web.app
 To start the development server, run:
 ```sh
 npm start
+```
+To Build the project, run:
+```sh
+npm run build
 ```
 
 ## Features

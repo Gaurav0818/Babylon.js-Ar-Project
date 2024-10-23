@@ -1,4 +1,5 @@
 import * as GUI from "babylonjs-gui";
+import * as BABYLON from "babylonjs"; // Import Babylon.js
 import { playAnimation } from "./AnimationController";
 import { engine } from "./Scene";
 
@@ -43,9 +44,9 @@ export const initUI = (s, xr) =>
 	if (xr) {
         xr.baseExperience.onStateChangedObservable.add((state) => {
             if (state === BABYLON.WebXRState.IN_XR) {
-                UI.scaleTo(screen.width, screen.height); 
+                UI.scaleTo(window.innerWidth, window.innerHeight);  // Use window.innerWidth and window.innerHeight
             } else {
-                UI.scaleTo(screen.width, screen.height);  
+                UI.scaleTo(window.innerWidth, window.innerHeight);  // Use window.innerWidth and window.innerHeight
             }
         });
     }
