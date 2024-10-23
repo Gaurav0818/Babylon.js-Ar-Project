@@ -43,11 +43,9 @@ export const initUI = (s, xr) =>
 	if (xr) {
         xr.baseExperience.onStateChangedObservable.add((state) => {
             if (state === BABYLON.WebXRState.IN_XR) {
-                // Adjust the UI or buttons when entering AR
-                UI.scaleTo(screen.width, screen.height);  // Rescale UI for AR mode
+                UI.scaleTo(screen.width, screen.height); 
             } else {
-                // Restore original UI scale when exiting AR
-                UI.scaleTo(screen.width, screen.height);  // Rescale UI back
+                UI.scaleTo(screen.width, screen.height);  
             }
         });
     }
@@ -64,7 +62,7 @@ const addButton = (text, onClick) =>
 	button.background = "green";
 	button.onPointerUpObservable.add(onClick);
 
-	button.paddingTop = "5px";
+	button.paddingTop = "2px";
 
 	panel.addControl(button);
 };

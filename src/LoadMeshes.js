@@ -4,7 +4,7 @@ import { SetAnimKeyMaps } from "./AnimationController";
 
 export let playerAnims;
 
-export const SetupEnvironment = async (scene) => 
+export const SpawnModel = async (scene) => 
 {
 	console.log("Env Setup");
 	return CreatPlayerContainer(scene);

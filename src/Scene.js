@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import * as BABYLON from "babylonjs";
-import { SetupEnvironment } from "./LoadMeshes";
+import { SpawnModel } from "./LoadMeshes";
 import { initUI } from "./UIManager";
 import { initCamera } from "./Camera";
 import { initXR } from "./XR";
@@ -93,7 +93,7 @@ export const Scene = () =>
 	{
 		if (!player)
 		{
-			player = await SetupEnvironment(scene); // Load meshes if player doesn't exist
+			player = await SpawnModel(scene); // Load meshes if player doesn't exist
 			handlePlayerInput(scene, player, xr); // Input handling modularized
 		} 
 		else 
