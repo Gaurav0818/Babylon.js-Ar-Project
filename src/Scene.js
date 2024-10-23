@@ -11,6 +11,7 @@ export let scene;
 export let canvasEl;
 export let player;
 export let xr;
+let uiPanel;
 
 export const Scene = () => 
 {
@@ -60,11 +61,55 @@ export const Scene = () =>
 	const setupScene = async () => 
 	{
 		await initCamera(scene); 				// Camera setup is moved to a separate file
-		player = await SetupEnvironment(scene); // Load meshes
 		xr = await initXR(scene);     			// XR setup modularized
-		handlePlayerInput(scene, player, xr);  	// Input handling modularized
-		initUI(scene); 						// UI for debugging
+		xr.baseExperience.onStateChangedObservable.add((state)=>
+		{
+			if(state === BABYLON.WebXRState.IN_XR)
+			{
+				showSetup();
+			}
+			else
+			{
+				hideSetup();
+			}
+		});
+
 	};
+
+	const hideSetup = async () => 
+	{
+		if (uiPanel)
+		{
+			uiPanel.isVisible = false; // Hide uiPanel
+		}
+
+		if (player)
+		{
+			player.rootNodes[0].setEnabled(false); // Hide player mesh
+		}
+	}
+
+	const showSetup = async () => 
+	{
+		if (!player)
+		{
+			player = await SetupEnvironment(scene); // Load meshes if player doesn't exist
+			handlePlayerInput(scene, player, xr); // Input handling modularized
+		} 
+		else 
+		{
+			player.rootNodes[0].setEnabled(true); // Show player mesh if already loaded
+		}
+
+		if (!uiPanel)
+		{
+			uiPanel = initUI(scene); // Initialize and store uiPanel if not created yet
+		} 
+		else 
+		{
+			uiPanel.isVisible = true; // Show uiPanel if it already exists
+		}
+	}
 
 	return (
 		<div>

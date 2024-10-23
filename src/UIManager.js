@@ -36,6 +36,8 @@ export const initUI = (s) =>
 	addButton("Run Animation", () => playAnimation("runAnim"));
 	addButton("Jump Animation", () => playAnimation("jumpAnim"));
 	addButton("Idle Animation", () => playAnimation("idleAnim"));
+
+	return panel;
 };
 
 const addButton = (text, onClick) => 
